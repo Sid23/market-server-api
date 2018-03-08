@@ -1,0 +1,29 @@
+version: '3'
+services:
+
+  redis:
+    command: redis-server
+    ports:
+      - '6379:6379'
+    image: redis:alpine  
+
+  db:
+    image: 'mysql:5.7'
+    environment:
+      MYSQL_ROOT_PASSWORD: "VKikCMMgm2qg"
+      MYSQL_DATABASE: development
+    volumes: 
+      - db-datavolume:/var/lib/mysql      
+
+  api:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bin/rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - ./rails:/home/app/webapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+volumes:
+  db-datavolume:
