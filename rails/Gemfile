@@ -42,6 +42,10 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  # FFaker to seed the database
+  gem 'ffaker'
+  # Factory girl to manage objects creation
+  gem 'factory_girl_rails'
 end
 
 group :development do
@@ -62,3 +66,36 @@ gem 'rails-i18n'
 
 # Serializers let me choose how the output will be formatted
 gem 'active_model_serializers', '~> 0.10.6'
+
+############### ADDED BY USER ###################
+
+# Devise token auth will manage authentication
+gem 'devise_token_auth'
+# Needed by devise token auth
+gem 'omniauth', '~> 1.6'
+gem 'devise', ' ~> 4.2 '
+
+# This is to manage cross-orign requests
+gem 'rack-cors', :require => 'rack/cors'
+
+# Responder lets me choose the file format to use in every response
+gem 'responders'
+
+# Paranoia lets me soft-delete records
+gem "paranoia"
+
+# Images upload for staging/production
+gem 'fog'
+# File Upload 
+gem 'carrierwave'
+# Files upload for base64 photos
+gem 'carrierwave-base64'
+
+# Kaminari handles pagination
+gem 'kaminari'
+
+# Kaminari modifier for API
+gem 'api-pagination'
+
+# Gem to manage user's role
+gem 'cancancan'
