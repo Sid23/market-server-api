@@ -13,7 +13,8 @@ Rails.application.routes.draw do
             # User authentication routes
             mount_devise_token_auth_for 'User', at: 'auth'
             
-            resources :users, :only => [:index]
+            resources :users, :only => [:index, :show, :update, :destroy]
+            resources :admins, :only => [:index, :show, :update, :destroy]
         end   
     end
 end
