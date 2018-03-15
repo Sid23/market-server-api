@@ -9,20 +9,21 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def update
-        if current_api_user[:id] == params[:id]
-            user = User.find(id)
-            if user.update(user_params)
-                render json: user, status: 201
-            else
-                render json: { errors: user.errors }, status: 422
-            end
+        user = User.find(params[:id])
+        if user.update(user_params)
+            render json: user, status: :accepted
         else
-            render json: { errors: "Cannot update other users" }, status: :not_authorized
+            render json: { errors: user.errors }, status: 422
         end
     end
 
     def destroy
-
+        user = User.find(params[:id])
+        if user.destroy
+            render status: :no_content
+        else
+            render json: {errors: appointment.errors}, status: :not_acceptable
+        end
     end
     
     private
