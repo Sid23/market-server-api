@@ -24,6 +24,16 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - sidekiq
+
+  sidekiq:
+    build: .
+    volumes:
+      - ./rails:/home/app/webapp
+    depends_on:
+      - db
+      - redis
+    command: bundle exec sidekiq       
 
 volumes:
   db-datavolume:

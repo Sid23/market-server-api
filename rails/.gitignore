@@ -14,3 +14,12 @@
 !/tmp/.keep
 
 .byebug_history
+
+#Ignore secrets
+rails/config/application.yml
+
+# Ignore uploads
+rails/public/uploads/*
+
+# Ignore Gemfile.lock
+rails/Gemfile.lock

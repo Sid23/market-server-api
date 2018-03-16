@@ -1,11 +1,33 @@
 class Api::V1::UsersController < ApplicationController
 
     def index
-        render json: User.where(type: nil)
+        render json: User.all
     end
 
     def show
         render json: User.find(params[:id])
+    end
+
+    def create
+        # Generate random password for new created user
+        range = [*'0'..'9',*'A'..'Z',*'a'..'z']
+        generated_password = Array.new(10){ range.sample }.join
+        user = User.new(
+            name: params[:name],
+            surname: params[:surname],
+            email: params[:email],
+            password: generated_password,
+            password_confirmation: generated_password
+        )
+
+        if user.save
+            user.send_welcome_mail
+            user.send_reset_password_instructions        
+            render json: user, status: :created
+        else
+            render json: { errors: user.errors }, status: :unprocessable_entity
+        end
+
     end
 
     def update
@@ -29,6 +51,6 @@ class Api::V1::UsersController < ApplicationController
     private
     
         def user_params
-          params.require(:user).permit(:email, :password, :id, :password_confirmation, :name, :surname)
+          params.permit(:email, :password, :id, :password_confirmation, :name, :surname)
         end
 end

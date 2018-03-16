@@ -13,4 +13,13 @@ class User < ActiveRecord::Base
     def admin?
         self.type == "Admin"
     end
+
+    # Overrides Devise method to deliver with ActiveJob
+    def send_devise_notification(notification, *args)
+        devise_mailer.send(notification, self, *args).deliver_later
+    end
+
+    def send_welcome_mail
+        UserMailer.user_welcome_mail(self.name, self.email).deliver_later
+    end
 end

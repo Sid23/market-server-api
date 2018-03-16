@@ -39,7 +39,7 @@ class Ability
       # User is an Admin
       can [:index, :show], [User, Admin]
       can [:update, :destroy], Admin, id: user.id
-      can [:update, :destroy], User
+      can [:create, :update, :destroy], User
     else
       # Ordinary User
       cannot :manage, Admin

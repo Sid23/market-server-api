@@ -1,0 +1,28 @@
+# Add configuration values here, as shown below.
+defaults: &defaults
+  DB_ADAPTER: "mysql2"
+  DB_NAME: "development"
+  DB_USER: "rails"
+  DB_PASSWORD: "fasdff3sa63gfg"
+  DB_HOST: "db"  
+  ACTIVE_JOB_URL: "redis://redis:6379/0"
+  AWS_REGION: "eu-west-1"
+  NEWRELIC_LICENSE_KEY: "3ad3b14ed429f48530770c286ca706c83001790a"
+  MAILGUN_PSWD: "564762b0f7d96e2a2b56f01eb352221d"
+  DEVISE_PASSWORD_RESET_URL: "http://localhost:3000/reset_password"
+  DEVISE_TOKEN_AUTH_PEPPER: 'd067625c4eb84a7cfc1698b3e3a6e838395f1222a95972f5c113efef4c476d8250c251867e8ff2724564ef8aeab0c29e0a2a7a7683319e08725c2ccf281cf0e4'
+
+development:
+  <<: *defaults
+  SERVER_IP: "http://10.131.184.144:3000"
+
+staging:
+  <<: *defaults
+  
+  AWS_ACCESS_KEY_ID: "AKIAI6JLJRG53YQY7KSQ"
+  AWS_SECRET_ACCESS_KEY: "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"
+  AWS_ENDPOINT_URL: "vuala-api-staging.s3.amazonaws.com"
+  AWS_BUCKET: "vuala-api-staging"
+  DEVISE_PASSWORD_RESET_URL: "https://vuala-api-staging.leva-services.me/reset_password"
+  DEVISE_TOKEN_AUTH_SECRET_KEY: "37734477883a20e355edf3d59a1c46f3ab2c16fbd8c75f2d312fc701b5ddb67a86e193db4d004c39868000d0d01d393e202e26175e9e4161a5c4bbb9451b059c"
+  DEVISE_TOKEN_AUTH_PEPPER: 'd067625c4eb84a7cfc1698b3e35972f5c113efef4c476d8250c25a6e838395f1222a91867e8ff27a7683319e08725c2ccf281cf0e424564ef8aeab0c29e0a2a7'  

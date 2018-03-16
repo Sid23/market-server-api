@@ -99,3 +99,6 @@ gem 'api-pagination'
 
 # Gem to manage user's role
 gem 'cancancan'
+
+#Required for delayed jobs
+gem 'sidekiq'
