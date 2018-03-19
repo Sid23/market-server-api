@@ -45,7 +45,7 @@ class Ability
     else
       # Ordinary User
       cannot :manage, Admin
-      can [:index, :show], User, Course
+      can [:index, :show], [User, Course]
       can [:update, :destroy], User, id: user.id
     end
   end

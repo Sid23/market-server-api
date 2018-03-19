@@ -23,7 +23,7 @@ class ApplicationController < ActionController::API
   end
 
   def unauthorized_action
-    render :json => {error: => "Action not authorized."}, :status => :forbidden
+    render json: {error: "Action not authorized."}, status: :forbidden
   end
 
   def current_ability

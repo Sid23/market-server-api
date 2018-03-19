@@ -35,7 +35,7 @@ class Api::V1::UsersController < ApplicationController
         if user.update(user_params)
             render json: user, status: :accepted
         else
-            render json: { errors: user.errors }, status: 422
+            render json: { errors: user.errors }, status: :unprocessable_entity
         end
     end
 
@@ -44,7 +44,7 @@ class Api::V1::UsersController < ApplicationController
         if user.destroy
             render status: :no_content
         else
-            render json: {errors: appointment.errors}, status: :not_acceptable
+            render json: {errors: user.errors}, status: :not_acceptable
         end
     end
     
