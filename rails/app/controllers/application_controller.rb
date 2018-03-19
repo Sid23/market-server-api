@@ -13,19 +13,17 @@ class ApplicationController < ActionController::API
   # Defininition of custom methods for different exceptions
   rescue_from ActiveRecord::RecordNotFound, :with => :not_found
   rescue_from CanCan::AccessDenied, :with => :unauthorized_action
-  rescue_from CanCan::AccessDenied, :with => :unauthorized_action
 
   def root 
     render json: {}, status: :ok
-  
   end  
 
   def not_found
-    render json: {errors: "Endpoint not found."}, status: :not_found
+    render json: {error: "Endpoint not found."}, status: :not_found
   end
 
-  def unauthorized_action(error)
-    render :json => {:error => "Action not authorized."}, :status => :not_allowed
+  def unauthorized_action
+    render :json => {error: => "Action not authorized."}, :status => :forbidden
   end
 
   def current_ability

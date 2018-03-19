@@ -32,7 +32,7 @@ class Ability
     #logger.debug(user)
     
     # Defina alias actions for crud
-    alias_action :create, :read, :update, :destroy, to: :crud
+    alias_action :index, :create, :show, :update, :destroy, to: :crud
 
     user ||= User.new()
     if user.admin?
@@ -40,10 +40,12 @@ class Ability
       can [:index, :show], [User, Admin]
       can [:update, :destroy], Admin, id: user.id
       can [:create, :update, :destroy], User
+
+      can :crud, Course
     else
       # Ordinary User
       cannot :manage, Admin
-      can [:index, :show], User
+      can [:index, :show], User, Course
       can [:update, :destroy], User, id: user.id
     end
   end

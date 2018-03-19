@@ -19,6 +19,8 @@ Rails.application.routes.draw do
             
             resources :users, :only => [:index, :create, :show, :update, :destroy]
             resources :admins, :only => [:index, :show, :update, :destroy]
+
+            resources :courses, :only => [:index, :show, :create, :update, :destroy]
         end   
     end
 
