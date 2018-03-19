@@ -18,8 +18,13 @@ Rails.application.routes.draw do
             mount_devise_token_auth_for 'User', at: 'auth'
             
             resources :users, :only => [:index, :create, :show, :update, :destroy]
-            resources :admins, :only => [:index, :show, :update, :destroy]
+            # Nested routes to acces to all courses of a specific user
+            resources :users do
+                resources :courses, :only => [:index, :create], controller: 'users/courses'
+            end
 
+            resources :admins, :only => [:index, :show, :update, :destroy]
+            # general routes for courses
             resources :courses, :only => [:index, :show, :create, :update, :destroy]
         end   
     end
@@ -28,6 +33,6 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
   # If no route matches avoid routing errors
-  #get ":url" => "application#not_found", :constraints => { :url => /.*/ }
+  get ":url" => "application#not_found", :constraints => { :url => /.*/ }
 
 end

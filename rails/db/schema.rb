@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180319075720) do
+ActiveRecord::Schema.define(version: 20180319145133) do
 
   create_table "courses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
     t.string "code", null: false
     t.integer "year", null: false
-    t.integer "difficulty", default: 2
+    t.integer "difficulty"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -27,8 +27,12 @@ ActiveRecord::Schema.define(version: 20180319075720) do
   end
 
   create_table "subscriptions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "course_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_subscriptions_on_course_id"
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -63,4 +67,6 @@ ActiveRecord::Schema.define(version: 20180319075720) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "subscriptions", "courses"
+  add_foreign_key "subscriptions", "users"
 end
