@@ -21,11 +21,16 @@ Rails.application.routes.draw do
             # Nested routes to acces to all courses of a specific user
             resources :users do
                 resources :courses, :only => [:index, :create], controller: 'users/courses'
-            end
+            end            
 
             resources :admins, :only => [:index, :show, :update, :destroy]
             # general routes for courses
             resources :courses, :only => [:index, :show, :create, :update, :destroy]
+            # Nested routes to acces to all user subscribet to a specific course
+            resources :courses do
+                resources :users, :only => :index,  controller: 'courses/users'
+            end
+
         end   
     end
 

@@ -38,7 +38,9 @@ class Ability
     if user.admin?
       # User is an Admin
       can [:index, :show], [User, Admin]
+      # Admin can update/destroy only itself
       can [:update, :destroy], Admin, id: user.id
+      # Admin can create/update/delete all users
       can [:create, :update, :destroy], User
 
       can :crud, Course
@@ -46,6 +48,7 @@ class Ability
       # Ordinary User
       cannot :manage, Admin
       can [:index, :show], [User, Course]
+      # User can update/destroy only itseld
       can [:update, :destroy], User, id: user.id
     end
   end
